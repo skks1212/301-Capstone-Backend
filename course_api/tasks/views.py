@@ -15,7 +15,7 @@ class BoardSerializer(ModelSerializer):
 class StatusSerializer(ModelSerializer):
     class Meta:
         model = Status
-        exclude = ("created_by" , "external_id","deleted")
+        exclude = ("created_by", "external_id" ,"deleted")
 
 class TaskSerializer(ModelSerializer):
     board_object = BoardSerializer(source="board", read_only=True)
@@ -54,10 +54,19 @@ class StatusViewset(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        board = get_object_or_404(Board.objects.filter(id=self.kwargs["boards_pk"] , created_by =self.request.user))
+        serializer.save(board=board, created_by=self.request.user)
+    #def perform_create(self, serializer):
+    #    serializer.save(created_by=self.request.user)
 
     def get_queryset(self):
-        return self.queryset.filter(created_by = self.request.user)
+        print(self.kwargs)
+
+        board = get_object_or_404(Board.objects.filter(id=self.kwargs["boards_pk"] , created_by =self.request.user))
+        return self.queryset.filter(board=board, created_by=self.request.user)
+
+    #def get_queryset(self):
+    #    return self.queryset.filter(created_by = self.request.user)
 
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()

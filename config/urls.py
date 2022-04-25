@@ -12,9 +12,9 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 schema_view = get_schema_view(
    openapi.Info(
-      title="TypeForm API",
+      title="Task Manager API",
       default_version='v1',
-      description="Api Documentation for Typeform",
+      description="Api Documentation for Task Manager",
       terms_of_service="https://typeformapi.coronasafe.live/",
       contact=openapi.Contact(email="hey@gigin.dev"),
       license=openapi.License(name="MIT License"),

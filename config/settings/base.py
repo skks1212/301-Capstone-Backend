@@ -43,7 +43,17 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {"default": env.db("DATABASE_URL", default="postgres:///course_api")}
+#DATABASES = {"default": env.db("DATABASE_URL", default="postgres://capstone")}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'capstone',
+        'USER': 'postgres',
+        'PASSWORD': 'newpassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
