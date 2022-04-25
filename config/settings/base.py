@@ -336,4 +336,4 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     "sentry-trace",
 ]
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*","tewdooapp.herokuapp.com"]
